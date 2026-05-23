@@ -16,6 +16,8 @@ import WishlistPage from './pages/WishlistPage.jsx';
 import UserDashboard from './pages/UserDashboard.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
+import PrivacyPage from './pages/PrivacyPage.jsx';
+import TermsPage from './pages/TermsPage.jsx';
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
             <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
           </Routes>
           <Toaster />
         </Router>
