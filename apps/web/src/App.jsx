@@ -19,6 +19,7 @@ import SignupPage from './pages/SignupPage.jsx';
 import PrivacyPage from './pages/PrivacyPage.jsx';
 import TermsPage from './pages/TermsPage.jsx';
 import OrderSuccessPage from './pages/OrderSuccessPage.jsx';
+import WhatsAppButton from './components/WhatsAppButton.jsx';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/order-success" element={<OrderSuccessPage />} />
           </Routes>
           <Toaster />
+          <WhatsAppButton />
         </Router>
       </CartProvider>
     </AuthProvider>
