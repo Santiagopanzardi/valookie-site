@@ -287,6 +287,20 @@ const HomePage = () => {
             </motion.div>
           </div>
         </section>
+
+        <section className="py-10 bg-white border-t">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <img
+              src="/subvencio-logos.webp"
+              alt="Generalitat de Catalunya - Cofinançat per la Unió Europea - Ministerio de Trabajo - SEPE - Sistema Nacional de Garantía Juvenil"
+              className="mx-auto max-w-full h-auto mb-4"
+              style={{ maxHeight: '60px' }}
+            />
+            <p className="text-xs text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Aquesta actuació està impulsada i subvencionada pel Departament d'Empresa i Treball i cofinançada per la Unió Europea mitjançant el Fons Social Europeu Plus.
+            </p>
+          </div>
+        </section>
       </main>
 
       <Footer />
