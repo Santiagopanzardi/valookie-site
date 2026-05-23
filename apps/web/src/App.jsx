@@ -18,6 +18,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import PrivacyPage from './pages/PrivacyPage.jsx';
 import TermsPage from './pages/TermsPage.jsx';
+import OrderSuccessPage from './pages/OrderSuccessPage.jsx';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/order-success" element={<OrderSuccessPage />} />
           </Routes>
           <Toaster />
         </Router>

@@ -14,6 +14,9 @@ import ShippingCalculator from '@/components/ShippingCalculator.jsx';
 import { useCart } from '@/hooks/useCart.js';
 import { useAuth } from '@/contexts/AuthContext.jsx';
 import pb from '@/lib/pocketbaseClient';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -53,39 +56,33 @@ const CheckoutPage = () => {
     setLoading(true);
 
     try {
-      const orderData = {
-        userId: isAuthenticated ? currentUser.id : 'guest',
-        items: cart.map(item => ({
-          productId: item.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity
-        })),
-        subtotal: getCartTotal(),
-        shippingCost: shippingInfo.cost,
-        total: getCartTotal() + shippingInfo.cost,
-        status: 'pending',
-        shippingAddress: {
-          name: formData.name,
-          email: formData.email,
-          address: formData.address,
-          city: formData.city,
-          phone: formData.phone
-        },
-        postalCode: formData.postalCode
-      };
+      const cartWithImages = cart.map(item => ({
+        ...item,
+        imageUrl: item.image ? pb.files.getUrl(item, item.image) : null,
+      }));
 
-      if (isAuthenticated) {
-        await pb.collection('orders').create(orderData, { $autoCancel: false });
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cart: cartWithImages,
+          shippingCost: shippingInfo.isFree ? 0 : shippingInfo.cost,
+          customerEmail: formData.email,
+          successUrl: `${window.location.origin}/order-success`,
+          cancelUrl: `${window.location.origin}/checkout`,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Error al crear la sesión de pago');
       }
 
-      clearCart();
-      toast.success('¡Pedido realizado con éxito!');
-      navigate('/');
+      window.location.href = data.url;
     } catch (error) {
-      console.error('Error al realizar el pedido:', error);
-      toast.error('Error al realizar el pedido. Por favor, inténtalo de nuevo.');
-    } finally {
+      console.error('Error al procesar el pago:', error);
+      toast.error('Error al procesar el pago. Por favor, inténtalo de nuevo.');
       setLoading(false);
     }
   };
@@ -227,7 +224,7 @@ const CheckoutPage = () => {
                     <h3 className="text-lg font-semibold mb-4">Método de pago</h3>
                     <div className="bg-muted/30 rounded-xl p-4 flex items-center gap-3">
                       <CreditCard className="w-6 h-6 text-primary" />
-                      <span className="text-muted-foreground">Integración de pago con Stripe (simulación)</span>
+                      <span className="text-muted-foreground">Pago seguro con tarjeta — procesado por Stripe</span>
                     </div>
                   </div>
 
@@ -237,7 +234,7 @@ const CheckoutPage = () => {
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                     size="lg"
                   >
-                    {loading ? 'Procesando...' : `Realizar Pedido - €${total.toFixed(2)}`}
+                    {loading ? 'Redirigiendo al pago...' : `Pagar €${total.toFixed(2)}`}
                   </Button>
                 </form>
               </div>
