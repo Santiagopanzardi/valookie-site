@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button.jsx';
 import { Input } from '@/components/ui/input.jsx';
 import { Label } from '@/components/ui/label.jsx';
 import { Separator } from '@/components/ui/separator.jsx';
-import { CreditCard, Trash2 } from 'lucide-react';
+import { CreditCard, Trash2, Plus, Minus } from 'lucide-react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header.jsx';
@@ -20,7 +20,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
-  const { cart, getCartTotal, removeFromCart, clearCart } = useCart();
+  const { cart, getCartTotal, removeFromCart, updateQuantity, clearCart } = useCart();
   const { currentUser, isAuthenticated } = useAuth();
   const [shippingInfo, setShippingInfo] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -251,22 +251,40 @@ const CheckoutPage = () => {
                         <img
                           src={pb.files.getUrl(item, item.image)}
                           alt={item.name}
-                          className="w-20 h-20 object-cover rounded-lg"
+                          className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
                         />
                       )}
                       <div className="flex-1 min-w-0">
                         <h4 className="font-medium truncate">{item.name}</h4>
-                        <p className="text-sm text-muted-foreground">Cantidad: {item.quantity}</p>
-                        <p className="text-primary font-bold">€{(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="text-primary font-bold mt-1">€{(item.price * item.quantity).toFixed(2)}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-7 w-7"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          >
+                            <Minus className="w-3 h-3" />
+                          </Button>
+                          <span className="w-6 text-center font-medium text-sm">{item.quantity}</span>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-7 w-7"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          >
+                            <Plus className="w-3 h-3" />
+                          </Button>
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="h-7 w-7 text-destructive ml-1"
+                            onClick={() => removeFromCart(item.id)}
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
                       </div>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="text-destructive"
-                        onClick={() => removeFromCart(item.id)}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
                     </div>
                   ))}
                 </div>
