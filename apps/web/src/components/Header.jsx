@@ -19,10 +19,8 @@ const Header = () => {
   };
 
   const navLinks = [
-    { to: '/', label: 'Inicio' },
     { to: '/shop', label: 'Tienda' },
     { to: '/about', label: 'Nosotros' },
-    { to: '/faq', label: 'Preguntas Frecuentes' },
     { to: '/contact', label: 'Contacto' }
   ];
 
@@ -43,7 +41,7 @@ const Header = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                className="px-4 py-2 rounded-full font-medium transition-all duration-200 text-foreground hover:bg-primary hover:text-primary-foreground"
               >
                 {link.label}
               </Link>
