@@ -5,16 +5,11 @@ import { Button } from '@/components/ui/button.jsx';
 import { Input } from '@/components/ui/input.jsx';
 import { Label } from '@/components/ui/label.jsx';
 import { Textarea } from '@/components/ui/textarea.jsx';
-import { Mail, Phone, MapPin, Clock, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 
-const TikTokIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
-  </svg>
-);
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -155,46 +150,6 @@ const ContactPage = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Horario de pedidos online</h3>
-                      <p className="text-muted-foreground">
-                        Lunes – Viernes: 9:00 – 20:00<br />
-                        Sábado: 10:00 – 18:00<br />
-                        Domingo: Cerrado
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Instagram className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Redes sociales</h3>
-                      <div className="flex flex-col gap-1">
-                        <a
-                          href="https://www.instagram.com/valookie.cookies"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline flex items-center gap-2"
-                        >
-                          <Instagram className="w-4 h-4" /> @valookie.cookies
-                        </a>
-                        <a
-                          href="https://www.tiktok.com/@valookie.cookies"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline flex items-center gap-2"
-                        >
-                          <TikTokIcon /> @valookie.cookies
-                        </a>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -202,9 +157,9 @@ const ContactPage = () => {
               <div className="rounded-2xl overflow-hidden border">
                 <iframe
                   title="Valookie en Google Maps"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2982.3!2d2.4426!3d41.5401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a4b028a4ece7%3A0x8bafe78bf850446a!2sValookie!5e0!3m2!1ses!2ses!4v1716000000000!5m2!1ses!2ses"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.5!2d2.4442!3d41.5389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4b528a2ce2909%3A0x89afe78bf850446a!2sValookie%20-%20Cookies%20estilo%20New%20York%20en%20Matar%C3%B3!5e0!3m2!1ses!2ses!4v1716000000000!5m2!1ses!2ses"
                   width="100%"
-                  height="280"
+                  height="420"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
