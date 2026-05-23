@@ -17,14 +17,16 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    const reviews = (data.reviews || []).map((r) => ({
-      name: r.authorAttribution?.displayName || 'Cliente',
-      photo: r.authorAttribution?.photoUri || null,
-      rating: r.rating,
-      text: r.originalText?.text || r.text?.text || '',
-      date: r.publishTime,
-      url: r.googleMapsUri,
-    }));
+    const reviews = (data.reviews || [])
+      .map((r) => ({
+        name: r.authorAttribution?.displayName || 'Cliente',
+        photo: r.authorAttribution?.photoUri || null,
+        rating: r.rating,
+        text: r.originalText?.text || r.text?.text || '',
+        date: r.publishTime,
+        url: r.googleMapsUri,
+      }))
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     res.status(200).json({
       rating: data.rating,
