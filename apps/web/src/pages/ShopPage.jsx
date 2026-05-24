@@ -2,13 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button } from '@/components/ui/button.jsx';
+import { Badge } from '@/components/ui/badge.jsx';
 import { Input } from '@/components/ui/input.jsx';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select.jsx';
-import { Star, Search } from 'lucide-react';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet.jsx';
+import { Star, Search, Filter, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
+import FilterPanel from '@/components/FilterPanel.jsx';
+import ActiveFilters from '@/components/ActiveFilters.jsx';
 import pb from '@/lib/pocketbaseClient';
 import { useCart } from '@/hooks/useCart.js';
 
@@ -21,14 +24,46 @@ const ShopPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('newest');
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [selectedAllergens, setSelectedAllergens] = useState([]);
+  const [availableCategories, setAvailableCategories] = useState([]);
+  const [availableAllergens, setAvailableAllergens] = useState([]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(100);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   useEffect(() => {
+    if (products.length > 0) {
+      // Extract unique categories
+      const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
+      setAvailableCategories(categories);
+
+      // Extract unique allergens
+      const allergenSet = new Set();
+      products.forEach(p => {
+        if (p.allergens) {
+          p.allergens.split(',').forEach(a => allergenSet.add(a.trim()));
+        }
+      });
+      setAvailableAllergens(Array.from(allergenSet));
+
+      // Calculate price range
+      const prices = products.map(p => p.price);
+      const min = Math.floor(Math.min(...prices));
+      const max = Math.ceil(Math.max(...prices));
+      setMinPrice(min);
+      setMaxPrice(max);
+      setPriceRange([min, max]);
+    }
+  }, [products]);
+
+  useEffect(() => {
     filterAndSortProducts();
-  }, [products, searchQuery, sortBy, categoryFilter]);
+  }, [products, searchQuery, sortBy, categoryFilter, priceRange, selectedAllergens]);
 
   const fetchProducts = async () => {
     try {
@@ -48,6 +83,7 @@ const ShopPage = () => {
   const filterAndSortProducts = () => {
     let filtered = [...products];
 
+    // Search filter
     if (searchQuery) {
       filtered = filtered.filter(p =>
         p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -55,10 +91,28 @@ const ShopPage = () => {
       );
     }
 
+    // Category filter
     if (categoryFilter !== 'all') {
       filtered = filtered.filter(p => p.category === categoryFilter);
     }
 
+    // Price range filter
+    filtered = filtered.filter(p =>
+      p.price >= priceRange[0] && p.price <= priceRange[1]
+    );
+
+    // Allergen filter (exclusion logic)
+    if (selectedAllergens.length > 0) {
+      filtered = filtered.filter(p => {
+        if (!p.allergens) return true;
+        const productAllergens = p.allergens.toLowerCase().split(',').map(a => a.trim());
+        return !selectedAllergens.some(allergen =>
+          productAllergens.includes(allergen.toLowerCase())
+        );
+      });
+    }
+
+    // Sort
     switch (sortBy) {
       case 'price-low':
         filtered.sort((a, b) => a.price - b.price);
@@ -77,6 +131,20 @@ const ShopPage = () => {
     }
 
     setFilteredProducts(filtered);
+  };
+
+  // Clear filter functions
+  const clearSearch = () => setSearchQuery('');
+  const clearCategory = () => setCategoryFilter('all');
+  const clearPriceRange = () => setPriceRange([minPrice, maxPrice]);
+  const clearAllergen = (allergen) => {
+    setSelectedAllergens(prev => prev.filter(a => a !== allergen));
+  };
+  const clearAllFilters = () => {
+    setSearchQuery('');
+    setCategoryFilter('all');
+    setPriceRange([minPrice, maxPrice]);
+    setSelectedAllergens([]);
   };
 
   const renderStars = (rating) => {
@@ -108,7 +176,8 @@ const ShopPage = () => {
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
+          {/* Desktop: Search + Filter Button */}
+          <div className="hidden md:flex gap-4 mb-6">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <Input
@@ -118,32 +187,128 @@ const ShopPage = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 bg-white text-gray-900 placeholder:text-gray-500"
               />
+              {searchQuery && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6"
+                  onClick={clearSearch}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
             </div>
 
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-full md:w-48 bg-white text-gray-900">
-                <SelectValue placeholder="Categoría" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Todas las Categorías</SelectItem>
-                <SelectItem value="cookie_type">Tipo de Galleta</SelectItem>
-                <SelectItem value="pack_size">Tamaño del Paquete</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full md:w-48 bg-white text-gray-900">
-                <SelectValue placeholder="Ordenar por" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="newest">Más Recientes</SelectItem>
-                <SelectItem value="popularity">Más Populares</SelectItem>
-                <SelectItem value="rating">Mejor Calificadas</SelectItem>
-                <SelectItem value="price-low">Precio: Menor a Mayor</SelectItem>
-                <SelectItem value="price-high">Precio: Mayor a Menor</SelectItem>
-              </SelectContent>
-            </Select>
+            <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="gap-2">
+                  <Filter className="w-4 h-4" />
+                  Filtros
+                  {(selectedAllergens.length > 0 || categoryFilter !== 'all' ||
+                    priceRange[0] !== minPrice || priceRange[1] !== maxPrice) && (
+                    <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-xs">
+                      {selectedAllergens.length +
+                        (categoryFilter !== 'all' ? 1 : 0) +
+                        (priceRange[0] !== minPrice || priceRange[1] !== maxPrice ? 1 : 0)}
+                    </Badge>
+                  )}
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[350px] overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle>Filtros y Ordenamiento</SheetTitle>
+                </SheetHeader>
+                <div className="mt-6">
+                  <FilterPanel
+                    categoryFilter={categoryFilter}
+                    setCategoryFilter={setCategoryFilter}
+                    availableCategories={availableCategories}
+                    sortBy={sortBy}
+                    setSortBy={setSortBy}
+                    priceRange={priceRange}
+                    setPriceRange={setPriceRange}
+                    minPrice={minPrice}
+                    maxPrice={maxPrice}
+                    selectedAllergens={selectedAllergens}
+                    setSelectedAllergens={setSelectedAllergens}
+                    availableAllergens={availableAllergens}
+                  />
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
+
+          {/* Mobile: Search + Filter Button */}
+          <div className="flex md:hidden gap-2 mb-6">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Buscar..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 bg-white text-gray-900"
+              />
+            </div>
+            <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon" className="relative">
+                  <Filter className="w-5 h-5" />
+                  {(selectedAllergens.length > 0 || categoryFilter !== 'all' ||
+                    priceRange[0] !== minPrice || priceRange[1] !== maxPrice) && (
+                    <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {selectedAllergens.length +
+                        (categoryFilter !== 'all' ? 1 : 0) +
+                        (priceRange[0] !== minPrice || priceRange[1] !== maxPrice ? 1 : 0)}
+                    </span>
+                  )}
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] sm:w-[400px] overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle>Filtros</SheetTitle>
+                </SheetHeader>
+                <div className="mt-6">
+                  <FilterPanel
+                    categoryFilter={categoryFilter}
+                    setCategoryFilter={setCategoryFilter}
+                    availableCategories={availableCategories}
+                    sortBy={sortBy}
+                    setSortBy={setSortBy}
+                    priceRange={priceRange}
+                    setPriceRange={setPriceRange}
+                    minPrice={minPrice}
+                    maxPrice={maxPrice}
+                    selectedAllergens={selectedAllergens}
+                    setSelectedAllergens={setSelectedAllergens}
+                    availableAllergens={availableAllergens}
+                  />
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+
+          {/* Active Filters */}
+          <ActiveFilters
+            searchQuery={searchQuery}
+            categoryFilter={categoryFilter}
+            priceRange={priceRange}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            selectedAllergens={selectedAllergens}
+            onClearSearch={clearSearch}
+            onClearCategory={clearCategory}
+            onClearPriceRange={clearPriceRange}
+            onClearAllergen={clearAllergen}
+            onClearAll={clearAllFilters}
+          />
+
+          {/* Results Count */}
+          {!loading && (
+            <div className="mb-4 text-sm text-muted-foreground">
+              Mostrando {filteredProducts.length} de {products.length} productos
+            </div>
+          )}
 
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -162,15 +327,14 @@ const ShopPage = () => {
             <div className="text-center py-20 bg-muted/30 rounded-2xl">
               <Search className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-2xl font-bold mb-2">No se encontraron galletas</h3>
-              <p className="text-muted-foreground mb-6">Intenta ajustar tu búsqueda o filtros</p>
+              <p className="text-muted-foreground mb-6">
+                Intenta ajustar tu búsqueda o filtros para encontrar lo que buscas
+              </p>
               <Button
-                onClick={() => {
-                  setSearchQuery('');
-                  setCategoryFilter('all');
-                }}
+                onClick={clearAllFilters}
                 className="bg-primary text-primary-foreground hover:bg-primary/90"
               >
-                Limpiar Filtros
+                Limpiar Todos los Filtros
               </Button>
             </div>
           ) : (
