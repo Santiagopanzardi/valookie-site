@@ -25,7 +25,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/60 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3">
@@ -36,12 +36,12 @@ const Header = () => {
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="px-4 py-2 rounded-full font-medium transition-all duration-200 text-foreground hover:bg-primary hover:text-primary-foreground"
+                className="px-5 py-2 rounded-full font-medium tracking-wide transition-all duration-200 text-foreground/80 hover:text-primary hover:bg-primary/8"
               >
                 {link.label}
               </Link>
