@@ -54,6 +54,8 @@ const ContactPage = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+
+            {/* Columna izquierda: formulario + mapa */}
             <div className="space-y-8">
               <div className="bg-card rounded-2xl p-8">
                 <h2 className="text-2xl font-bold mb-6">Envíanos un mensaje</h2>
@@ -107,8 +109,34 @@ const ContactPage = () => {
                   </Button>
                 </form>
               </div>
+
+              {/* Google Maps embed */}
+              <div className="rounded-2xl overflow-hidden border relative">
+                <iframe
+                  title="Valookie en Google Maps"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.5!2d2.4442!3d41.5389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4b528a2ce2909%3A0x89afe78bf850446a!2sValookie%20-%20Cookies%20estilo%20New%20York%20en%20Matar%C3%B3!5e0!3m2!1ses!2ses!4v1716000000000!5m2!1ses!2ses"
+                  width="100%"
+                  height="520"
+                  style={{ border: 0, display: 'block' }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=Valookie+-+Cookies+estilo+New+York+en+Matar%C3%B3&destination_place_id=ChIJCSzOKlq1pBIRakX4uL94r4k"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full shadow-lg hover:bg-gray-50 transition-colors border border-gray-200"
+                  >
+                    <MapPin className="w-4 h-4 text-primary" />
+                    Cómo llegar
+                  </a>
+                </div>
+              </div>
             </div>
 
+            {/* Columna derecha: info de contacto + pedidos personalizados */}
             <div className="space-y-6">
               <div className="bg-card rounded-2xl p-8">
                 <h2 className="text-2xl font-bold mb-6">Información de contacto</h2>
@@ -149,22 +177,7 @@ const ContactPage = () => {
                       </a>
                     </div>
                   </div>
-
                 </div>
-              </div>
-
-              {/* Google Maps embed */}
-              <div className="rounded-2xl overflow-hidden border">
-                <iframe
-                  title="Valookie en Google Maps"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.5!2d2.4442!3d41.5389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4b528a2ce2909%3A0x89afe78bf850446a!2sValookie%20-%20Cookies%20estilo%20New%20York%20en%20Matar%C3%B3!5e0!3m2!1ses!2ses!4v1716000000000!5m2!1ses!2ses"
-                  width="100%"
-                  height="420"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
               </div>
 
               <div className="bg-secondary/30 rounded-2xl p-8">
