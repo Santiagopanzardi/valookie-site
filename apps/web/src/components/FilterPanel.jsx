@@ -4,6 +4,7 @@ import { Slider } from '@/components/ui/slider.jsx';
 import { Checkbox } from '@/components/ui/checkbox.jsx';
 import { Label } from '@/components/ui/label.jsx';
 import { Separator } from '@/components/ui/separator.jsx';
+import { Input } from '@/components/ui/input.jsx';
 
 const FilterPanel = ({
   categoryFilter,
@@ -51,20 +52,53 @@ const FilterPanel = ({
 
       {/* Price Range Filter */}
       <div>
-        <Label className="text-sm font-semibold mb-3 block">
-          Rango de Precio: €{priceRange[0]} - €{priceRange[1]}
-        </Label>
+        <Label className="text-sm font-semibold mb-3 block">Rango de Precio</Label>
         <Slider
           value={priceRange}
           onValueChange={setPriceRange}
           min={minPrice}
           max={maxPrice}
           step={0.5}
-          className="mb-2"
+          className="mb-4"
         />
-        <div className="flex justify-between text-xs text-muted-foreground">
-          <span>€{minPrice}</span>
-          <span>€{maxPrice}</span>
+        <div className="flex items-center gap-2">
+          <div className="flex-1">
+            <Label className="text-xs text-muted-foreground mb-1 block">Mínimo</Label>
+            <div className="relative">
+              <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">€</span>
+              <Input
+                type="number"
+                value={priceRange[0]}
+                min={minPrice}
+                max={priceRange[1]}
+                step={0.5}
+                onChange={(e) => {
+                  const val = Math.min(Number(e.target.value), priceRange[1]);
+                  setPriceRange([Math.max(val, minPrice), priceRange[1]]);
+                }}
+                className="pl-5 h-8 text-sm bg-white"
+              />
+            </div>
+          </div>
+          <span className="text-muted-foreground mt-5">—</span>
+          <div className="flex-1">
+            <Label className="text-xs text-muted-foreground mb-1 block">Máximo</Label>
+            <div className="relative">
+              <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">€</span>
+              <Input
+                type="number"
+                value={priceRange[1]}
+                min={priceRange[0]}
+                max={maxPrice}
+                step={0.5}
+                onChange={(e) => {
+                  const val = Math.max(Number(e.target.value), priceRange[0]);
+                  setPriceRange([priceRange[0], Math.min(val, maxPrice)]);
+                }}
+                className="pl-5 h-8 text-sm bg-white"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
