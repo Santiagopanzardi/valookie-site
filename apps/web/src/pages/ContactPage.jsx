@@ -124,7 +124,7 @@ const ContactPage = () => {
                 />
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
                   <a
-                    href="https://www.google.com/maps/dir/?api=1&destination=Valookie+-+Cookies+estilo+New+York+en+Matar%C3%B3&destination_place_id=ChIJCSzOKlq1pBIRakX4uL94r4k"
+                    href="https://www.google.com/maps/dir/?api=1&destination=41.54051457128079,2.437771675866665"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full shadow-lg hover:bg-gray-50 transition-colors border border-gray-200"
