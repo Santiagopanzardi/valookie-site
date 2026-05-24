@@ -126,9 +126,9 @@ const HomePage = () => {
               className="text-center max-w-4xl mx-auto"
             >
               <img
-                src="https://horizons-cdn.hostinger.com/20aebe59-367d-486d-b6c5-8fc8284b40e6/fe61320c4da2579ac9246cab93342189.png"
+                src="/logo-valookie.png"
                 alt="Valookie"
-                className="h-32 w-auto mx-auto mb-6"
+                className="h-40 w-auto mx-auto mb-6"
               />
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-white text-balance" style={{letterSpacing: '-0.02em'}}>
                 Las Cookies Más <span className="text-primary">Brutales</span> de Mataró
