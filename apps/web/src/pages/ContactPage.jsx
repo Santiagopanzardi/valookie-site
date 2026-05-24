@@ -114,7 +114,7 @@ const ContactPage = () => {
               <div className="rounded-2xl overflow-hidden border relative">
                 <iframe
                   title="Valookie en Google Maps"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.5!2d2.4442!3d41.5389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4b528a2ce2909%3A0x89afe78bf850446a!2sValookie%20-%20Cookies%20estilo%20New%20York%20en%20Matar%C3%B3!5e0!3m2!1ses!2ses!4v1716000000000!5m2!1ses!2ses"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2986.3270915098346!2d2.437771675866665!3d41.54051457128079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4b528cea22903%3A0x89afffb8f8506ac4!2sValookie%20-%20Cookies%20estilo%20New%20York%20en%20Matar%C3%B3!5e0!3m2!1ses!2ses!4v1779619495505!5m2!1ses!2ses"
                   width="100%"
                   height="520"
                   style={{ border: 0, display: 'block' }}
