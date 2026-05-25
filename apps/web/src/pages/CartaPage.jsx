@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const pages = ['/carta-1.png', '/carta-2.png', '/carta-3.png', '/carta-4.png'];
+const pages = Array.from({ length: 19 }, (_, i) => `/carta-${i + 1}.png`);
 
 const CartaPage = () => {
   const bookRef = useRef(null);
