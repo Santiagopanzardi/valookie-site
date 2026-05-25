@@ -88,9 +88,12 @@ const ShopPage = () => {
       );
     }
 
-    // Category filter
+    // Category filter (nuevo campo categories es array)
     if (categoryFilter !== 'all') {
-      filtered = filtered.filter(p => p.category === categoryFilter);
+      filtered = filtered.filter(p => {
+        const cats = Array.isArray(p.categories) ? p.categories : (p.category ? [p.category] : []);
+        return cats.includes(categoryFilter);
+      });
     }
 
     // Price range filter
@@ -296,6 +299,21 @@ const ShopPage = () => {
                       )}
                       <div className="p-6 space-y-4">
                         <div>
+                          {/* Badges */}
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            {product.isBestSeller && (
+                              <span className="text-xs bg-primary text-white px-2 py-0.5 rounded-full font-medium">⭐ Más Vendida</span>
+                            )}
+                            {product.isPopular && (
+                              <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-medium">🔥 Popular</span>
+                            )}
+                            {product.isVegan && (
+                              <span className="text-xs bg-green-600 text-white px-2 py-0.5 rounded-full font-medium">🌱 Vegana</span>
+                            )}
+                            {product.isGlutenFree && (
+                              <span className="text-xs bg-yellow-600 text-white px-2 py-0.5 rounded-full font-medium">Sin Gluten</span>
+                            )}
+                          </div>
                           <h3 className="font-semibold text-lg mb-2 cursor-pointer hover:text-primary transition-colors duration-200" onClick={() => navigate(`/product/${product.id}`)}>
                             {product.name}
                           </h3>
@@ -307,7 +325,12 @@ const ShopPage = () => {
                               </span>
                             </div>
                           )}
-                          <p className="text-2xl font-bold text-primary">€{product.price.toFixed(2)}</p>
+                          <div className="flex items-center gap-2">
+                            <p className="text-2xl font-bold text-primary">€{product.price.toFixed(2)}</p>
+                            {product.originalPrice > product.price && (
+                              <p className="text-sm text-muted-foreground line-through">€{product.originalPrice.toFixed(2)}</p>
+                            )}
+                          </div>
                         </div>
                         <Button
                           onClick={() => {

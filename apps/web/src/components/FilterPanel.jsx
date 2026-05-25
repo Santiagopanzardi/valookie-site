@@ -32,20 +32,21 @@ const FilterPanel = ({
     <div className="space-y-6">
       {/* Category Filter */}
       <div>
-        <Label className="text-sm font-semibold mb-2 block">Categoría</Label>
-        <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-          <SelectTrigger className="w-full bg-white text-gray-900">
-            <SelectValue placeholder="Todas las Categorías" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Todas las Categorías</SelectItem>
-            {availableCategories.map(cat => (
-              <SelectItem key={cat} value={cat}>
+        <Label className="text-sm font-semibold mb-3 block">Categoría</Label>
+        <div className="space-y-2">
+          {['Cookie', 'Cookie Vegana', 'Sin Gluten', 'Medialuna & Chipas', 'Otros Dulces'].map(cat => (
+            <div key={cat} className="flex items-center space-x-2">
+              <Checkbox
+                id={`cat-${cat}`}
+                checked={categoryFilter === cat}
+                onCheckedChange={(checked) => setCategoryFilter(checked ? cat : 'all')}
+              />
+              <Label htmlFor={`cat-${cat}`} className="text-sm font-normal cursor-pointer">
                 {cat}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+              </Label>
+            </div>
+          ))}
+        </div>
       </div>
 
       <Separator />
