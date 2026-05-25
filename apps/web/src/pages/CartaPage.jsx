@@ -1,64 +1,83 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import HTMLFlipBook from 'react-pageflip';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button.jsx';
 
 const pages = ['/carta-1.png', '/carta-2.png', '/carta-3.png', '/carta-4.png'];
 
 const CartaPage = () => {
-  const [current, setCurrent] = useState(0);
+  const bookRef = useRef(null);
+  const [page, setPage] = useState(0);
 
-  const prev = () => setCurrent(i => Math.max(0, i - 1));
-  const next = () => setCurrent(i => Math.min(pages.length - 1, i + 1));
+  const onFlip = (e) => setPage(e.data);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 py-8 select-none">
       <img
         src="/logo-valookie.png"
         alt="Valookie"
-        className="h-16 w-auto mb-6 brightness-0 invert"
+        className="h-14 w-auto mb-8 brightness-0 invert"
       />
 
-      <div className="relative w-full max-w-2xl">
-        <img
-          key={current}
-          src={pages[current]}
-          alt={`Carta página ${current + 1}`}
-          className="w-full rounded-2xl shadow-2xl"
-        />
-
+      <div className="w-full flex items-center justify-center gap-4">
         {/* Prev */}
-        {current > 0 && (
-          <button
-            onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 transition-all"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-        )}
+        <button
+          onClick={() => bookRef.current?.pageFlip().flipPrev()}
+          className="text-white/50 hover:text-white transition-colors p-2"
+        >
+          <ChevronLeft className="w-8 h-8" />
+        </button>
+
+        {/* Flipbook */}
+        <HTMLFlipBook
+          ref={bookRef}
+          width={340}
+          height={480}
+          size="fixed"
+          minWidth={200}
+          maxWidth={600}
+          minHeight={300}
+          maxHeight={800}
+          showCover={false}
+          flippingTime={700}
+          usePortrait={true}
+          startPage={0}
+          drawShadow={true}
+          autoSize={true}
+          onFlip={onFlip}
+          className="shadow-2xl"
+        >
+          {pages.map((src, i) => (
+            <div key={i} className="bg-white">
+              <img
+                src={src}
+                alt={`Página ${i + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </HTMLFlipBook>
 
         {/* Next */}
-        {current < pages.length - 1 && (
-          <button
-            onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 transition-all"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        )}
+        <button
+          onClick={() => bookRef.current?.pageFlip().flipNext()}
+          className="text-white/50 hover:text-white transition-colors p-2"
+        >
+          <ChevronRight className="w-8 h-8" />
+        </button>
       </div>
 
       {/* Dots */}
-      <div className="flex gap-2 mt-6">
+      <div className="flex gap-2 mt-8">
         {pages.map((_, i) => (
           <button
             key={i}
-            onClick={() => setCurrent(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${i === current ? 'bg-white scale-125' : 'bg-white/40'}`}
+            onClick={() => bookRef.current?.pageFlip().flip(i)}
+            className={`w-2.5 h-2.5 rounded-full transition-all ${i === page ? 'bg-white scale-125' : 'bg-white/30'}`}
           />
         ))}
       </div>
 
-      <p className="text-white/50 text-xs mt-4">{current + 1} / {pages.length}</p>
+      <p className="text-white/40 text-xs mt-3">{page + 1} / {pages.length}</p>
     </div>
   );
 };
