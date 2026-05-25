@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const pages = Array.from({ length: 19 }, (_, i) => `/carta-${i + 1}.png`);
+// Páginas 1-4 ocultas temporalmente (máquina de helado sin servicio)
+const pages = Array.from({ length: 15 }, (_, i) => `/carta-${i + 5}.png`);
 
 const CartaPage = () => {
   const bookRef = useRef(null);
