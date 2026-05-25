@@ -50,17 +50,16 @@ const ProductDetailPage = () => {
   const fetchRecommended = async (currentProduct) => {
     try {
       const all = await pb.collection('products').getFullList({ $autoCancel: false });
-      const sameCat = all.filter(p => {
-        if (p.id === currentProduct.id) return false;
+      const otherProducts = all.filter(p => p.id !== currentProduct.id);
+      const sameCat = otherProducts.filter(p => {
         const cats = Array.isArray(p.categories) ? p.categories : [];
         const currentCats = Array.isArray(currentProduct.categories) ? currentProduct.categories : [];
         return cats.some(c => currentCats.includes(c));
       });
-      // Si no hay de la misma categoría, usar cualquier otro producto
-      const pool = sameCat.length >= 3 ? sameCat : all.filter(p => p.id !== currentProduct.id);
-      // Mezclar y tomar 4
-      const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, 4);
-      setRecommended(shuffled);
+      // Construir pool: primero misma categoría, luego el resto, mezclados
+      const sameShuffled = sameCat.sort(() => Math.random() - 0.5);
+      const otherShuffled = otherProducts.filter(p => !sameCat.includes(p)).sort(() => Math.random() - 0.5);
+      setRecommended([...sameShuffled, ...otherShuffled]);
     } catch (e) {
       console.error('Error al cargar recomendados:', e);
     }
@@ -330,25 +329,20 @@ const ProductDetailPage = () => {
             </div>
           </div>
 
-          {/* Reviews Section */}
-          <div className="mt-20 pt-16 border-t border-border/50">
-            <ProductReviews productId={id} />
-          </div>
-
-          {/* Recomendados */}
+          {/* Comprar juntos */}
           {recommended.filter(p => !cart.some(c => c.id === p.id)).length > 0 && (
             <div className="mt-20 pt-16 border-t border-border/50">
               <h2 className="text-3xl font-bold mb-8">Comprar juntos</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {recommended
                   .filter(p => !cart.some(c => c.id === p.id))
+                  .slice(0, 4)
                   .map((p, i) => (
                     <motion.div
                       key={p.id}
                       initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.1 }}
-                      viewport={{ once: true }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
                       className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 border border-border/50"
                     >
                       {p.image && (
@@ -393,6 +387,11 @@ const ProductDetailPage = () => {
               </div>
             </div>
           )}
+
+          {/* Reviews Section */}
+          <div className="mt-20 pt-16 border-t border-border/50">
+            <ProductReviews productId={id} />
+          </div>
         </div>
       </main>
 
