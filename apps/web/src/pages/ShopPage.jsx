@@ -113,6 +113,17 @@ const ShopPage = () => {
     }
 
     // Sort
+    const categoryOrder = ['Cookie', 'Cookie Vegana', 'Sin Gluten', 'Medialuna & Chipas', 'Otros Dulces'];
+
+    const getCategoryRank = (p) => {
+      const cats = Array.isArray(p.categories) ? p.categories : [];
+      if (cats.length === 0) return 99;
+      return Math.min(...cats.map(c => {
+        const idx = categoryOrder.indexOf(c);
+        return idx === -1 ? 99 : idx;
+      }));
+    };
+
     switch (sortBy) {
       case 'price-low':
         filtered.sort((a, b) => a.price - b.price);
@@ -127,7 +138,18 @@ const ShopPage = () => {
         filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
         break;
       default:
-        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        // Orden por defecto: más vendidas → populares → orden de categoría
+        filtered.sort((a, b) => {
+          const aBestSeller = a.isBestSeller ? 0 : 1;
+          const bBestSeller = b.isBestSeller ? 0 : 1;
+          if (aBestSeller !== bBestSeller) return aBestSeller - bBestSeller;
+
+          const aPopular = a.isPopular ? 0 : 1;
+          const bPopular = b.isPopular ? 0 : 1;
+          if (aPopular !== bPopular) return aPopular - bPopular;
+
+          return getCategoryRank(a) - getCategoryRank(b);
+        });
     }
 
     setFilteredProducts(filtered);
