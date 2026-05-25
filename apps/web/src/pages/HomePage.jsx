@@ -100,8 +100,8 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Valookie - Galletas Artesanales Hechas con Amor</title>
-        <meta name="description" content="Descubre las deliciosas galletas artesanales de Valookie hechas en España. Ingredientes premium, sabores únicos, entregadas frescas en tu puerta." />
+        <title>Valookie - Cookies Artesanales Hechas con Amor</title>
+        <meta name="description" content="Descubre las deliciosas cookies artesanales de Valookie hechas en España. Ingredientes premium, sabores únicos, entregadas frescas en tu puerta." />
       </Helmet>
 
       <Header />
@@ -168,7 +168,7 @@ const HomePage = () => {
               className="text-center mb-12"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance" style={{letterSpacing: '-0.02em'}}>
-                Galletas Destacadas
+                Cookies Destacadas
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Descubre nuestras creaciones más amadas, horneadas frescas a diario con los mejores ingredientes.
@@ -321,7 +321,7 @@ const HomePage = () => {
                 Obtén ofertas exclusivas
               </h2>
               <p className="text-lg mb-8 opacity-90">
-                ¡Suscríbete a nuestro boletín y sé el primero en conocer nuevos sabores, promociones especiales y secretos de nuestras galletas!
+                ¡Suscríbete a nuestro boletín y sé el primero en conocer nuevos sabores, promociones especiales y secretos de nuestras cookies!
               </p>
               <div className="max-w-md mx-auto">
                 <NewsletterSignup />

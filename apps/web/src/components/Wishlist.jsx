@@ -21,7 +21,7 @@ const Wishlist = ({ wishlistItems, onRemove, onAddToCart }) => {
           <Star className="w-12 h-12 text-primary" />
         </div>
         <h2 className="text-2xl font-bold mb-2">Tu lista de favoritos está vacía</h2>
-        <p className="text-muted-foreground mb-6">¡Comienza a agregar tus galletas favoritas!</p>
+        <p className="text-muted-foreground mb-6">¡Comienza a agregar tus cookies favoritas!</p>
         <Button
           onClick={() => window.location.href = '/shop'}
           className="bg-primary text-primary-foreground hover:bg-primary/90"

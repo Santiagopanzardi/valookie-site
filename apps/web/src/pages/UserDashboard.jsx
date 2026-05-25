@@ -120,7 +120,7 @@ const UserDashboard = () => {
               Mi panel de control
             </h1>
             <p className="text-lg text-muted-foreground">
-              ¡Bienvenido de nuevo, {currentUser?.name || 'Amante de las galletas'}!
+              ¡Bienvenido de nuevo, {currentUser?.name || 'Amante de las cookies'}!
             </p>
           </div>
 

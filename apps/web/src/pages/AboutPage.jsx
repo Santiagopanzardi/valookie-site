@@ -11,7 +11,7 @@ const AboutPage = () => {
     {
       icon: Heart,
       title: 'Hechas con amor',
-      description: 'Cada galleta es elaborada a mano con cuidado y pasión por nuestro dedicado equipo de panaderos en Barcelona.'
+      description: 'Cada cookie es elaborada a mano con cuidado y pasión por nuestro dedicado equipo de panaderos en Barcelona.'
     },
     {
       icon: Award,
@@ -34,7 +34,7 @@ const AboutPage = () => {
     <>
       <Helmet>
         <title>Nosotros - Valookie</title>
-        <meta name="description" content="Aprende sobre la historia de Valookie, nuestra misión y compromiso para crear las mejores galletas artesanales en Barcelona." />
+        <meta name="description" content="Aprende sobre la historia de Valookie, nuestra misión y compromiso para crear las mejores cookies artesanales en Barcelona." />
       </Helmet>
 
       <Header />
@@ -52,7 +52,7 @@ const AboutPage = () => {
                 Nuestra historia
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Valookie nació de una simple pasión: crear galletas que aporten alegría a cada momento. Lo que comenzó como un pequeño experimento de cocina en Barcelona se ha convertido en una marca amada y reconocida por su calidad excepcional y sabores inolvidables.
+                Valookie nació de una simple pasión: crear cookies que aporten alegría a cada momento. Lo que comenzó como un pequeño experimento de cocina en Barcelona se ha convertido en una marca amada y reconocida por su calidad excepcional y sabores inolvidables.
               </p>
             </motion.div>
           </div>
@@ -71,10 +71,10 @@ const AboutPage = () => {
                   Elaborado con pasión
                 </h2>
                 <p className="text-lg text-foreground leading-relaxed mb-4">
-                  Cada galleta Valookie es un trabajo de amor. Nuestros panaderos se levantan antes del amanecer para preparar lotes frescos utilizando técnicas tradicionales pasadas de generación en generación, combinadas con sabores innovadores que sorprenden y deleitan.
+                  Cada cookie Valookie es un trabajo de amor. Nuestros panaderos se levantan antes del amanecer para preparar lotes frescos utilizando técnicas tradicionales pasadas de generación en generación, combinadas con sabores innovadores que sorprenden y deleitan.
                 </p>
                 <p className="text-lg text-foreground leading-relaxed">
-                  Creemos que las mejores galletas provienen de los mejores ingredientes. Por eso obtenemos chocolate premium, harina orgánica y mantequilla fresca de proveedores locales que comparten nuestro compromiso con la calidad.
+                  Creemos que las mejores cookies provienen de los mejores ingredientes. Por eso obtenemos chocolate premium, harina orgánica y mantequilla fresca de proveedores locales que comparten nuestro compromiso con la calidad.
                 </p>
               </motion.div>
 
@@ -87,7 +87,7 @@ const AboutPage = () => {
               >
                 <h3 className="text-2xl font-bold mb-4">Nuestra misión</h3>
                 <p className="text-foreground leading-relaxed mb-4">
-                  Crear momentos de felicidad a través de galletas excepcionales que celebren la calidad, la creatividad y el simple placer de un postre perfectamente horneado.
+                  Crear momentos de felicidad a través de cookies excepcionales que celebren la calidad, la creatividad y el simple placer de un postre perfectamente horneado.
                 </p>
                 <p className="text-foreground leading-relaxed">
                   Estamos comprometidos con la sostenibilidad, con el apoyo a las comunidades locales y con hacer que cada cliente se sienta parte de la familia Valookie.
@@ -146,7 +146,7 @@ const AboutPage = () => {
                 Únete a la familia Valookie
               </h2>
               <p className="text-lg mb-8 opacity-90 leading-relaxed">
-                Somos más que una empresa de galletas. Somos una comunidad de personas que creen que los momentos más dulces de la vida merecen los mejores sabores. Gracias por ser parte de nuestro viaje.
+                Somos más que una empresa de cookies. Somos una comunidad de personas que creen que los momentos más dulces de la vida merecen los mejores sabores. Gracias por ser parte de nuestro viaje.
               </p>
             </motion.div>
           </div>

@@ -181,8 +181,8 @@ const ShopPage = () => {
   return (
     <>
       <Helmet>
-        <title>Comprar Todas las Galletas - Valookie</title>
-        <meta name="description" content="Explora nuestra colección completa de galletas artesanales. Filtra por tipo, alérgenos y precio para encontrar tu delicia perfecta." />
+        <title>Comprar Todas las Cookies - Valookie</title>
+        <meta name="description" content="Explora nuestra colección completa de cookies artesanales. Filtra por tipo, alérgenos y precio para encontrar tu delicia perfecta." />
       </Helmet>
 
       <Header />
@@ -191,10 +191,10 @@ const ShopPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance" style={{letterSpacing: '-0.02em'}}>
-              Comprar todas las galletas
+              Comprar todas las cookies
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Descubre nuestra colección completa de galletas artesanales hechas con amor en Barcelona
+              Descubre nuestra colección completa de cookies artesanales hechas con amor en Barcelona
             </p>
           </div>
 
@@ -203,7 +203,7 @@ const ShopPage = () => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Buscar galletas..."
+              placeholder="Buscar cookies..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 bg-white text-gray-900 placeholder:text-gray-500"
@@ -292,7 +292,7 @@ const ShopPage = () => {
               ) : filteredProducts.length === 0 ? (
                 <div className="text-center py-20 bg-muted/30 rounded-2xl">
                   <Search className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold mb-2">No se encontraron galletas</h3>
+                  <h3 className="text-2xl font-bold mb-2">No se encontraron cookies</h3>
                   <p className="text-muted-foreground mb-6">
                     Intenta ajustar tu búsqueda o filtros para encontrar lo que buscas
                   </p>

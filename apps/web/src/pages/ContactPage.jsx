@@ -183,7 +183,7 @@ const ContactPage = () => {
               <div className="bg-secondary/30 rounded-2xl p-8">
                 <h3 className="text-xl font-bold mb-4">Pedidos personalizados</h3>
                 <p className="text-foreground leading-relaxed mb-4">
-                  ¿Planeas una boda, cumpleaños o evento corporativo? Hacemos cajas de galletas personalizadas para cualquier ocasión.
+                  ¿Planeas una boda, cumpleaños o evento corporativo? Hacemos cajas de cookies personalizadas para cualquier ocasión.
                 </p>
                 <p className="text-foreground leading-relaxed">
                   Escríbenos por WhatsApp o email y te preparamos un presupuesto sin compromiso.

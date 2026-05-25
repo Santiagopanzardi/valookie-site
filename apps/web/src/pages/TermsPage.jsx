@@ -8,7 +8,7 @@ const TermsPage = () => {
     <>
       <Helmet>
         <title>Términos y Condiciones - Valookie</title>
-        <meta name="description" content="Términos y condiciones de uso y compra en Valookie. Conoce tus derechos y obligaciones al comprar nuestras galletas artesanales." />
+        <meta name="description" content="Términos y condiciones de uso y compra en Valookie. Conoce tus derechos y obligaciones al comprar nuestras cookies artesanales." />
       </Helmet>
 
       <Header />
@@ -24,13 +24,13 @@ const TermsPage = () => {
 
             <section>
               <h2 className="text-2xl font-bold mb-4">1. Información general</h2>
-              <p><strong>Valookie</strong> es una empresa de galletas artesanales con domicilio en El Torrent 1, Mataró, Barcelona (08302). Correo electrónico: <a href="mailto:hola@valookie.com" className="text-primary hover:underline">hola@valookie.com</a>. Teléfono: +34 610 485 979.</p>
+              <p><strong>Valookie</strong> es una empresa de cookies artesanales con domicilio en El Torrent 1, Mataró, Barcelona (08302). Correo electrónico: <a href="mailto:hola@valookie.com" className="text-primary hover:underline">hola@valookie.com</a>. Teléfono: +34 610 485 979.</p>
               <p className="mt-3">El uso de este sitio web y la realización de pedidos implica la aceptación de estos términos y condiciones en su totalidad.</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold mb-4">2. Productos</h2>
-              <p>Todos nuestros productos son galletas artesanales elaboradas de forma artesanal. Las imágenes de los productos son orientativas y pueden variar ligeramente del producto final. Nos reservamos el derecho a modificar la disponibilidad de productos sin previo aviso.</p>
+              <p>Todos nuestros productos son cookies artesanales elaboradas de forma artesanal. Las imágenes de los productos son orientativas y pueden variar ligeramente del producto final. Nos reservamos el derecho a modificar la disponibilidad de productos sin previo aviso.</p>
             </section>
 
             <section>

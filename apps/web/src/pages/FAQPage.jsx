@@ -8,16 +8,16 @@ import Footer from '@/components/Footer.jsx';
 const FAQPage = () => {
   const faqs = [
     {
-      question: '¿Qué ingredientes utilizan en sus galletas?',
+      question: '¿Qué ingredientes utilizan en sus cookies?',
       answer: 'Utilizamos solo ingredientes naturales y de primera calidad, que incluyen harina orgánica, mantequilla real, chocolate de alta calidad y huevos frescos. Todos nuestros ingredientes provienen de proveedores de confianza que comparten nuestro compromiso con la calidad. Nunca utilizamos conservantes, colorantes ni sabores artificiales.'
     },
     {
       question: '¿Ofrecen opciones libres de alérgenos?',
-      answer: '¡Sí! Ofrecemos varias opciones amigables para alérgicos, incluyendo galletas sin gluten, sin lácteos y sin nueces. Cada página de producto enumera claramente todos los alérgenos. Sin embargo, ten en cuenta que todas nuestras galletas se preparan en instalaciones que procesan nueces, lácteos y gluten, por lo que puede haber contaminación cruzada.'
+      answer: '¡Sí! Ofrecemos varias opciones amigables para alérgicos, incluyendo cookies sin gluten, sin lácteos y sin nueces. Cada página de producto enumera claramente todos los alérgenos. Sin embargo, ten en cuenta que todas nuestras cookies se preparan en instalaciones que procesan nueces, lácteos y gluten, por lo que puede haber contaminación cruzada.'
     },
     {
-      question: '¿Cuánto tiempo se mantienen frescas las galletas?',
-      answer: 'Nuestras galletas se hornean frescas y se mantienen deliciosas hasta por 2 semanas cuando se guardan en un recipiente hermético a temperatura ambiente. Para conservarlas más tiempo, puedes congelarlas hasta por 3 meses. Recomendamos disfrutarlas durante la primera semana para obtener el mejor sabor y textura.'
+      question: '¿Cuánto tiempo se mantienen frescas las cookies?',
+      answer: 'Nuestras cookies se hornean frescas y se mantienen deliciosas hasta por 2 semanas cuando se guardan en un recipiente hermético a temperatura ambiente. Para conservarlas más tiempo, puedes congelarlas hasta por 3 meses. Recomendamos disfrutarlas durante la primera semana para obtener el mejor sabor y textura.'
     },
     {
       question: '¿Cuáles son sus tiempos de entrega?',
@@ -29,23 +29,23 @@ const FAQPage = () => {
     },
     {
       question: '¿Cuál es su política de devoluciones?',
-      answer: 'Queremos que estés completamente satisfecho con tu compra. Si recibes galletas dañadas o no estás contento con tu pedido, por favor contáctanos dentro de las 48 horas posteriores a la entrega. Coordinaremos un reemplazo o reembolso completo. Debido a la naturaleza perecedera de nuestros productos, no podemos aceptar devoluciones de paquetes abiertos.'
+      answer: 'Queremos que estés completamente satisfecho con tu compra. Si recibes cookies dañadas o no estás contento con tu pedido, por favor contáctanos dentro de las 48 horas posteriores a la entrega. Coordinaremos un reemplazo o reembolso completo. Debido a la naturaleza perecedera de nuestros productos, no podemos aceptar devoluciones de paquetes abiertos.'
     },
     {
       question: '¿Puedo personalizar mi pedido?',
-      answer: '¡Por supuesto! Ofrecemos cajas de galletas personalizadas para ocasiones especiales, regalos corporativos y eventos. Contáctanos a hello@valookie.com con tus requerimientos y nuestro equipo trabajará contigo para crear el pedido personalizado perfecto.'
+      answer: '¡Por supuesto! Ofrecemos cajas de cookies personalizadas para ocasiones especiales, regalos corporativos y eventos. Contáctanos a hello@valookie.com con tus requerimientos y nuestro equipo trabajará contigo para crear el pedido personalizado perfecto.'
     },
     {
       question: '¿Hacen envíos internacionales?',
-      answer: 'Actualmente, solo enviamos dentro de España para asegurar que nuestras galletas lleguen frescas y en perfectas condiciones. Estamos trabajando para expandir nuestras opciones de envío y esperamos ofrecer entrega internacional en el futuro.'
+      answer: 'Actualmente, solo enviamos dentro de España para asegurar que nuestras cookies lleguen frescas y en perfectas condiciones. Estamos trabajando para expandir nuestras opciones de envío y esperamos ofrecer entrega internacional en el futuro.'
     },
     {
-      question: '¿Cómo debo guardar mis galletas?',
-      answer: 'Guarda tus galletas Valookie en un recipiente hermético a temperatura ambiente, lejos de la luz solar directa y el calor. Esto las mantendrá frescas y conservará su textura. Evita refrigerar las galletas ya que esto puede hacer que se sequen y endurezcan.'
+      question: '¿Cómo debo guardar mis cookies?',
+      answer: 'Guarda tus cookies Valookie en un recipiente hermético a temperatura ambiente, lejos de la luz solar directa y el calor. Esto las mantendrá frescas y conservará su textura. Evita refrigerar las cookies ya que esto puede hacer que se sequen y endurezcan.'
     },
     {
-      question: '¿Sus galletas son aptas para veganos?',
-      answer: 'Actualmente ofrecemos una selección limitada de galletas veganas hechas sin ningún producto de origen animal. Estas están marcadas claramente en nuestro sitio web. Trabajamos continuamente para expandir nuestra línea vegana y ofrecer más opciones deliciosas basadas en plantas.'
+      question: '¿Sus cookies son aptas para veganos?',
+      answer: 'Actualmente ofrecemos una selección limitada de cookies veganas hechas sin ningún producto de origen animal. Estas están marcadas claramente en nuestro sitio web. Trabajamos continuamente para expandir nuestra línea vegana y ofrecer más opciones deliciosas basadas en plantas.'
     }
   ];
 
@@ -53,7 +53,7 @@ const FAQPage = () => {
     <>
       <Helmet>
         <title>Preguntas Frecuentes - Valookie</title>
-        <meta name="description" content="Encuentra respuestas a preguntas frecuentes sobre las galletas Valookie, ingredientes, entregas, alérgenos y más." />
+        <meta name="description" content="Encuentra respuestas a preguntas frecuentes sobre las cookies Valookie, ingredientes, entregas, alérgenos y más." />
       </Helmet>
 
       <Header />
@@ -65,7 +65,7 @@ const FAQPage = () => {
               Preguntas Frecuentes
             </h1>
             <p className="text-lg text-muted-foreground">
-              Todo lo que necesitas saber sobre nuestras galletas, entregas y más.
+              Todo lo que necesitas saber sobre nuestras cookies, entregas y más.
             </p>
           </div>
 

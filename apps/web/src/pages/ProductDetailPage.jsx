@@ -122,7 +122,7 @@ const ProductDetailPage = () => {
     <>
       <Helmet>
         <title>{`${product.name} - Valookie`}</title>
-        <meta name="description" content={product.description || `Compra ${product.name} en Valookie. Galletas artesanales hechas con amor en Barcelona.`} />
+        <meta name="description" content={product.description || `Compra ${product.name} en Valookie. Cookies artesanales hechas con amor en Barcelona.`} />
       </Helmet>
 
       <Header />
@@ -301,7 +301,7 @@ const ProductDetailPage = () => {
                     </p>
                   </div>
                   <p className="text-xs text-muted-foreground mt-6 leading-relaxed">
-                    Nuestras galletas se preparan en instalaciones que procesan nueces, lácteos y gluten. Puede haber contaminación cruzada.
+                    Nuestras cookies se preparan en instalaciones que procesan nueces, lácteos y gluten. Puede haber contaminación cruzada.
                   </p>
                 </div>
               )}

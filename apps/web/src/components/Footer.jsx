@@ -17,7 +17,7 @@ const Footer = () => {
               <img src="https://horizons-cdn.hostinger.com/20aebe59-367d-486d-b6c5-8fc8284b40e6/fe61320c4da2579ac9246cab93342189.png" alt="Valookie" className="h-10 w-auto" />
             </div>
             <p className="text-sm leading-relaxed opacity-90">
-              Galletas artesanales hechas con amor en España. Cada bocado es una celebración de sabor y calidad.
+              Cookies artesanales hechas con amor en España. Cada bocado es una celebración de sabor y calidad.
             </p>
           </div>
 

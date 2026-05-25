@@ -44,7 +44,7 @@ const ShoppingCart = () => {
                 <CartIcon className="w-12 h-12 text-muted-foreground opacity-50" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Tu carrito está vacío</h3>
-              <p className="text-muted-foreground mb-8">¡Añade algunas deliciosas galletas para empezar!</p>
+              <p className="text-muted-foreground mb-8">¡Añade algunas deliciosas cookies para empezar!</p>
               <Button
                 onClick={() => {
                   setOpen(false);

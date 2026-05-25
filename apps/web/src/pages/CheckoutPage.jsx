@@ -101,7 +101,7 @@ const CheckoutPage = () => {
         <div className="min-h-screen flex items-center justify-center px-4">
           <div className="text-center">
             <h2 className="text-3xl font-bold mb-4">Tu carrito está vacío</h2>
-            <p className="text-muted-foreground mb-6">¡Añade algunas deliciosas galletas para empezar!</p>
+            <p className="text-muted-foreground mb-6">¡Añade algunas deliciosas cookies para empezar!</p>
             <Button
               onClick={() => navigate('/shop')}
               className="bg-primary text-primary-foreground hover:bg-primary/90"

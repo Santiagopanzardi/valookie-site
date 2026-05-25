@@ -67,7 +67,7 @@ const WishlistPage = () => {
     <ProtectedRoute>
       <Helmet>
         <title>Mis Favoritos - Valookie</title>
-        <meta name="description" content="Visualiza y gestiona tus galletas Valookie favoritas." />
+        <meta name="description" content="Visualiza y gestiona tus cookies Valookie favoritas." />
       </Helmet>
 
       <Header />
@@ -79,7 +79,7 @@ const WishlistPage = () => {
               Mis favoritos
             </h1>
             <p className="text-lg text-muted-foreground">
-              Tus galletas favoritas, guardadas para después
+              Tus cookies favoritas, guardadas para después
             </p>
           </div>
 

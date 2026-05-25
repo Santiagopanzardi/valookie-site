@@ -60,7 +60,7 @@ const SignupPage = () => {
     <>
       <Helmet>
         <title>Registrarse - Valookie</title>
-        <meta name="description" content="Crea tu cuenta en Valookie para empezar a comprar deliciosas galletas artesanales." />
+        <meta name="description" content="Crea tu cuenta en Valookie para empezar a comprar deliciosas cookies artesanales." />
       </Helmet>
 
       <div className="min-h-screen flex items-center justify-center px-4 py-12">
