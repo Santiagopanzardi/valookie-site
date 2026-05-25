@@ -12,17 +12,19 @@ import ProductReviews from '@/components/ProductReviews.jsx';
 import pb from '@/lib/pocketbaseClient';
 import { useCart } from '@/hooks/useCart.js';
 import { useAuth } from '@/contexts/AuthContext.jsx';
+import { motion } from 'framer-motion';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
   const { currentUser, isAuthenticated } = useAuth();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [wishlistId, setWishlistId] = useState(null);
+  const [recommended, setRecommended] = useState([]);
 
   useEffect(() => {
     fetchProduct();
@@ -35,12 +37,32 @@ const ProductDetailPage = () => {
     try {
       const data = await pb.collection('products').getOne(id, { $autoCancel: false });
       setProduct(data);
+      fetchRecommended(data);
     } catch (error) {
       console.error('Error al cargar producto:', error);
       toast.error('Producto no encontrado.');
       navigate('/shop');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchRecommended = async (currentProduct) => {
+    try {
+      const all = await pb.collection('products').getFullList({ $autoCancel: false });
+      const sameCat = all.filter(p => {
+        if (p.id === currentProduct.id) return false;
+        const cats = Array.isArray(p.categories) ? p.categories : [];
+        const currentCats = Array.isArray(currentProduct.categories) ? currentProduct.categories : [];
+        return cats.some(c => currentCats.includes(c));
+      });
+      // Si no hay de la misma categoría, usar cualquier otro producto
+      const pool = sameCat.length >= 3 ? sameCat : all.filter(p => p.id !== currentProduct.id);
+      // Mezclar y tomar 4
+      const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, 4);
+      setRecommended(shuffled);
+    } catch (e) {
+      console.error('Error al cargar recomendados:', e);
     }
   };
 
@@ -312,6 +334,65 @@ const ProductDetailPage = () => {
           <div className="mt-20 pt-16 border-t border-border/50">
             <ProductReviews productId={id} />
           </div>
+
+          {/* Recomendados */}
+          {recommended.filter(p => !cart.some(c => c.id === p.id)).length > 0 && (
+            <div className="mt-20 pt-16 border-t border-border/50">
+              <h2 className="text-3xl font-bold mb-8">Comprar juntos</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {recommended
+                  .filter(p => !cart.some(c => c.id === p.id))
+                  .map((p, i) => (
+                    <motion.div
+                      key={p.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.1 }}
+                      viewport={{ once: true }}
+                      className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 border border-border/50"
+                    >
+                      {p.image && (
+                        <div
+                          className="aspect-square overflow-hidden cursor-pointer"
+                          onClick={() => navigate(`/product/${p.id}`)}
+                        >
+                          <img
+                            src={pb.files.getUrl(p, p.image)}
+                            alt={p.name}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
+                          />
+                        </div>
+                      )}
+                      <div className="p-4 space-y-3">
+                        <h3
+                          className="font-semibold text-sm cursor-pointer hover:text-primary transition-colors line-clamp-2"
+                          onClick={() => navigate(`/product/${p.id}`)}
+                        >
+                          {p.name}
+                        </h3>
+                        <div className="flex items-center justify-between">
+                          <p className="font-bold text-primary">€{p.price.toFixed(2)}</p>
+                          {p.originalPrice > p.price && (
+                            <p className="text-xs text-muted-foreground line-through">€{p.originalPrice.toFixed(2)}</p>
+                          )}
+                        </div>
+                        <Button
+                          onClick={() => {
+                            addToCart(p);
+                            toast.success(`¡${p.name} agregado!`);
+                          }}
+                          size="sm"
+                          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-xs"
+                        >
+                          <ShoppingCart className="w-3 h-3 mr-1" />
+                          Añadir
+                        </Button>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
 
