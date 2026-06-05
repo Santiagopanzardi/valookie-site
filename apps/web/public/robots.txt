@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /checkout
+Disallow: /order-success
+Disallow: /reset-password
+
+Sitemap: https://valookie.com/sitemap.xml

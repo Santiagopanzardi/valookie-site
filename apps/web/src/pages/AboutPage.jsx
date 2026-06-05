@@ -51,7 +51,7 @@ const AboutPage = () => {
                 viewport={{ once: true }}
               >
                 <img
-                  src="/val-santi.png"
+                  src="/val-santi.webp"
                   alt="Valentina y Santiago, fundadores de Valookie"
                   className="w-full max-w-sm mx-auto rounded-3xl shadow-xl object-cover"
                 />
@@ -127,7 +127,7 @@ const AboutPage = () => {
                 className="order-1 lg:order-2"
               >
                 <img
-                  src="/local-valookie.jpg"
+                  src="/local-valookie.webp"
                   alt="Local de Valookie en Mataró"
                   className="w-full rounded-3xl shadow-xl object-cover"
                 />

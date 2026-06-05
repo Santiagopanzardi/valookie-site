@@ -181,8 +181,9 @@ const ShopPage = () => {
   return (
     <>
       <Helmet>
-        <title>Comprar Todas las Cookies - Valookie</title>
-        <meta name="description" content="Explora nuestra colección completa de cookies artesanales. Filtra por tipo, alérgenos y precio para encontrar tu delicia perfecta." />
+        <title>Comprar Cookies Artesanales Online | Valookie Mataró</title>
+        <meta name="description" content="Compra cookies artesanales estilo New York online. Envío a toda España desde Mataró. Opciones veganas y sin gluten disponibles. Frescas cada día." />
+        <link rel="canonical" href="https://valookie.com/shop" />
       </Helmet>
 
       <Header />
@@ -311,12 +312,17 @@ const ShopPage = () => {
                       className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200"
                     >
                       {product.image && (
-                        <div className="aspect-square overflow-hidden cursor-pointer" onClick={() => navigate(`/product/${product.id}`)}>
+                        <div className="aspect-square overflow-hidden cursor-pointer relative" onClick={() => navigate(`/product/${product.id}`)}>
                           <img
                             src={pb.files.getUrl(product, product.image)}
                             alt={product.name}
-                            className="w-full h-full object-cover transition-transform duration-200 hover:scale-105"
+                            className={`w-full h-full object-cover transition-transform duration-200 hover:scale-105 ${product.inStock === false ? 'opacity-50 grayscale' : ''}`}
                           />
+                          {product.inStock === false && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="bg-black/70 text-white px-4 py-2 rounded-full font-bold text-sm">AGOTADO</span>
+                            </div>
+                          )}
                         </div>
                       )}
                       <div className="p-6 space-y-4">
@@ -359,9 +365,10 @@ const ShopPage = () => {
                             addToCart(product);
                             toast.success('¡Agregado al carrito!');
                           }}
-                          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                          disabled={product.inStock === false}
+                          className={`w-full ${product.inStock === false ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
                         >
-                          Agregar al Carrito
+                          {product.inStock === false ? 'Agotado' : 'Agregar al Carrito'}
                         </Button>
                       </div>
                     </div>

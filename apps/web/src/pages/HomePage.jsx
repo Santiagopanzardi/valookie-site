@@ -100,8 +100,15 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Valookie - Cookies Artesanales Hechas con Amor</title>
-        <meta name="description" content="Descubre las deliciosas cookies artesanales de Valookie hechas en España. Ingredientes premium, sabores únicos, entregadas frescas en tu puerta." />
+        <title>Valookie - Cookies Artesanales en Mataró | Envío a toda España</title>
+        <meta name="description" content="Cookies artesanales estilo New York en Mataró, Barcelona. Elaboradas a diario con ingredientes premium. Envío a toda España. Pide online tus cookies favoritas." />
+        <meta name="keywords" content="cookies Mataró, cookies artesanales Barcelona, cookies New York Barcelona, galletas artesanales, cookies a domicilio, pastelería Mataró" />
+        <link rel="canonical" href="https://valookie.com/" />
+        <meta property="og:title" content="Valookie - Cookies Artesanales en Mataró" />
+        <meta property="og:description" content="Cookies artesanales estilo New York elaboradas a diario en Mataró. Envío a toda España." />
+        <meta property="og:url" content="https://valookie.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://valookie.com/hero-cookies.webp" />
       </Helmet>
 
       <Header />
@@ -111,7 +118,7 @@ const HomePage = () => {
           {/* Imagen de fondo */}
           <div className="absolute inset-0">
             <img
-              src="/hero-cookies.jpg"
+              src="/hero-cookies.webp"
               alt="Cookies Valookie"
               className="w-full h-full object-cover"
             />
@@ -329,6 +336,8 @@ const HomePage = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* Sección Instagram — descomentar cuando tengamos las 4 fotos reales */}
 
         <section className="py-10 bg-white border-t">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">

@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { cart, shippingCost, customerEmail, customerName, customerPhone, customerAddress, successUrl, cancelUrl } = req.body;
+  const { cart, shippingCost, customerEmail, customerName, customerPhone, customerAddress, successUrl, cancelUrl, userId } = req.body;
 
   if (!cart || cart.length === 0) {
     return res.status(400).json({ error: 'El carrito está vacío' });
@@ -40,7 +40,6 @@ export default async function handler(req, res) {
     const orderSummary = cart.map(i => `${i.name} x${i.quantity}`).join(', ');
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
       customer_email: customerEmail || undefined,
@@ -60,7 +59,12 @@ export default async function handler(req, res) {
         customer_name: customerName || '',
         customer_phone: customerPhone || '',
         customer_address: customerAddress || '',
+        customer_email: customerEmail || '',
         order_summary: orderSummary.slice(0, 500),
+        items: JSON.stringify(cart.map(i => ({ name: i.name, quantity: i.quantity, price: i.price }))).slice(0, 500),
+        subtotal: String(cart.reduce((sum, i) => sum + i.price * i.quantity, 0)),
+        shipping_cost: String(shippingCost || 0),
+        user_id: userId || '',
       },
     });
 

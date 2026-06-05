@@ -262,11 +262,12 @@ const ProductDetailPage = () => {
 
                   <Button
                     onClick={handleAddToCart}
-                    className="flex-1 w-full h-14 bg-primary text-primary-foreground hover:bg-primary/90 text-lg rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                    disabled={product.inStock === false}
+                    className={`flex-1 w-full h-14 text-lg rounded-xl shadow-lg transition-all duration-200 ${product.inStock === false ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-primary text-primary-foreground hover:bg-primary/90 hover:-translate-y-0.5'}`}
                     size="lg"
                   >
                     <ShoppingCart className="w-6 h-6 mr-3" />
-                    Añadir al Carrito
+                    {product.inStock === false ? 'Agotado' : 'Añadir al Carrito'}
                   </Button>
 
                   <Button

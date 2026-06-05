@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input.jsx';
 import { Label } from '@/components/ui/label.jsx';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/AuthContext.jsx';
+import pb from '@/lib/pocketbaseClient';
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -14,6 +15,25 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showReset, setShowReset] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetLoading, setResetLoading] = useState(false);
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    if (!resetEmail) return;
+    setResetLoading(true);
+    try {
+      await pb.collection('users').requestPasswordReset(resetEmail);
+      toast.success('Te hemos enviado un correo para restablecer tu contraseña.');
+      setShowReset(false);
+      setResetEmail('');
+    } catch (error) {
+      toast.error('No se pudo enviar el correo. Verifica tu dirección e inténtalo de nuevo.');
+    } finally {
+      setResetLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,6 +101,52 @@ const LoginPage = () => {
                 {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
               </Button>
             </form>
+
+            <div className="mt-4 text-center">
+              <button
+                type="button"
+                onClick={() => setShowReset(true)}
+                className="text-sm text-primary hover:underline"
+              >
+                ¿Olvidaste tu contraseña?
+              </button>
+            </div>
+
+            {showReset && (
+              <div className="mt-4 p-4 bg-muted rounded-xl">
+                <p className="text-sm text-muted-foreground mb-3">
+                  Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.
+                </p>
+                <form onSubmit={handleResetPassword} className="space-y-3">
+                  <Input
+                    type="email"
+                    value={resetEmail}
+                    onChange={(e) => setResetEmail(e.target.value)}
+                    required
+                    placeholder="tu@email.com"
+                    className="bg-white text-gray-900 placeholder:text-gray-500"
+                  />
+                  <div className="flex gap-2">
+                    <Button
+                      type="submit"
+                      disabled={resetLoading}
+                      size="sm"
+                      className="bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
+                      {resetLoading ? 'Enviando...' : 'Enviar enlace'}
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowReset(false)}
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            )}
 
             <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">

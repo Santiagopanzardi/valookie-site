@@ -71,6 +71,7 @@ const CheckoutPage = () => {
           customerName: formData.name,
           customerPhone: formData.phone,
           customerAddress: `${formData.address}, ${formData.city} ${formData.postalCode}`,
+          userId: currentUser?.id || '',
           successUrl: `${window.location.origin}/order-success`,
           cancelUrl: `${window.location.origin}/checkout`,
         }),

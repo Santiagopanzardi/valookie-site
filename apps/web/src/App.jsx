@@ -20,6 +20,8 @@ import PrivacyPage from './pages/PrivacyPage.jsx';
 import TermsPage from './pages/TermsPage.jsx';
 import OrderSuccessPage from './pages/OrderSuccessPage.jsx';
 import CartaPage from './pages/CartaPage.jsx';
+import AdminOrdersPage from './pages/AdminOrdersPage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
 import WhatsAppButton from './components/WhatsAppButton.jsx';
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/order-success" element={<OrderSuccessPage />} />
             <Route path="/flipbook/carta-valookie" element={<CartaPage />} />
+            <Route path="/admin/orders" element={<AdminOrdersPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
           </Routes>
           <Toaster />
           <WhatsAppButton />

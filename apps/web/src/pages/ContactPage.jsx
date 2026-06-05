@@ -9,6 +9,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
+import pocketbaseClient from '@/lib/pocketbaseClient.js';
 
 
 const ContactPage = () => {
@@ -23,7 +24,11 @@ const ContactPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await pocketbaseClient.collection('contact_forms').create({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      });
       toast.success('¡Mensaje enviado! Nos pondremos en contacto pronto.');
       setFormData({ name: '', email: '', message: '' });
     } catch {

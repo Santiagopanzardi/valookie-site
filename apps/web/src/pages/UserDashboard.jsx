@@ -159,49 +159,67 @@ const UserDashboard = () => {
                     </Button>
                   </div>
                 ) : (
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>ID del Pedido</TableHead>
-                          <TableHead>Fecha</TableHead>
-                          <TableHead>Artículos</TableHead>
-                          <TableHead>Total</TableHead>
-                          <TableHead>Estado</TableHead>
-                          <TableHead>Acciones</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {orders.map((order) => (
-                          <TableRow key={order.id}>
-                            <TableCell className="font-medium">#{order.id.slice(0, 8)}</TableCell>
-                            <TableCell>
-                              {new Date(order.createdAt).toLocaleDateString('es-ES', {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric'
-                              })}
-                            </TableCell>
-                            <TableCell>{order.items?.length || 0} artículos</TableCell>
-                            <TableCell className="font-bold text-primary">€{order.total?.toFixed(2)}</TableCell>
-                            <TableCell>
-                              <Badge className={getStatusColor(order.status)}>
+                  <div className="space-y-4">
+                    {orders.map((order) => {
+                      const steps = ['pending', 'processing', 'shipped', 'delivered'];
+                      const currentStep = steps.indexOf(order.status);
+                      const isCancelled = order.status === 'cancelled';
+
+                      return (
+                        <div key={order.id} className="border rounded-xl p-5 space-y-4">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="font-bold text-lg">Pedido #{order.id.slice(0, 8)}</p>
+                              <p className="text-sm text-muted-foreground">
+                                {new Date(order.createdAt).toLocaleDateString('es-ES', {
+                                  year: 'numeric', month: 'long', day: 'numeric'
+                                })}
+                              </p>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-bold text-primary text-lg">€{order.total?.toFixed(2)}</p>
+                              <p className="text-sm text-muted-foreground">{order.items?.length || 0} artículos</p>
+                            </div>
+                          </div>
+
+                          {isCancelled ? (
+                            <div className="bg-red-50 text-red-700 px-4 py-2 rounded-lg text-sm font-medium">
+                              Pedido cancelado
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-xs text-muted-foreground">
+                                <span>Pendiente</span>
+                                <span>Preparando</span>
+                                <span>Enviado</span>
+                                <span>Entregado</span>
+                              </div>
+                              <div className="flex gap-1">
+                                {steps.map((step, i) => (
+                                  <div
+                                    key={step}
+                                    className={`h-2 flex-1 rounded-full ${i <= currentStep ? 'bg-primary' : 'bg-gray-200'}`}
+                                  />
+                                ))}
+                              </div>
+                              <p className="text-sm font-medium">
                                 {getTranslatedStatus(order.status)}
-                              </Badge>
-                            </TableCell>
-                            <TableCell>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => handleReorder(order)}
-                              >
-                                Reordenar
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
+                              </p>
+                            </div>
+                          )}
+
+                          <div className="flex gap-2 pt-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleReorder(order)}
+                            >
+                              Reordenar
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
