@@ -9,7 +9,7 @@ const FAQPage = () => {
   const faqs = [
     {
       question: '¿Qué ingredientes utilizan en sus cookies?',
-      answer: 'Utilizamos solo ingredientes naturales y de primera calidad, que incluyen harina orgánica, mantequilla real, chocolate de alta calidad y huevos frescos. Todos nuestros ingredientes provienen de proveedores de confianza que comparten nuestro compromiso con la calidad. Nunca utilizamos conservantes, colorantes ni sabores artificiales.'
+      answer: 'Utilizamos solo ingredientes frescos y de primera calidad, que incluyen harina orgánica, mantequilla real, chocolate de alta calidad y huevos frescos. Todos nuestros ingredientes provienen de proveedores de confianza que comparten nuestro compromiso con la calidad. Nunca utilizamos conservantes, colorantes ni sabores artificiales.'
     },
     {
       question: '¿Ofrecen opciones libres de alérgenos?',
@@ -17,7 +17,7 @@ const FAQPage = () => {
     },
     {
       question: '¿Cuánto tiempo se mantienen frescas las cookies?',
-      answer: 'Nuestras cookies se hornean frescas y se mantienen deliciosas hasta por 2 semanas cuando se guardan en un recipiente hermético a temperatura ambiente. Para conservarlas más tiempo, puedes congelarlas hasta por 3 meses. Recomendamos disfrutarlas durante la primera semana para obtener el mejor sabor y textura.'
+      answer: 'Nuestras cookies se hornean frescas y se mantienen deliciosas hasta por 5 días cuando se guardan en un recipiente hermético a temperatura ambiente. Para conservarlas más tiempo, puedes congelarlas hasta por 3 meses.'
     },
     {
       question: '¿Cuáles son sus tiempos de entrega?',
@@ -33,7 +33,7 @@ const FAQPage = () => {
     },
     {
       question: '¿Puedo personalizar mi pedido?',
-      answer: '¡Por supuesto! Ofrecemos cajas de cookies personalizadas para ocasiones especiales, regalos corporativos y eventos. Contáctanos a hello@valookie.com con tus requerimientos y nuestro equipo trabajará contigo para crear el pedido personalizado perfecto.'
+      answer: '¡Por supuesto! Ofrecemos cajas de cookies personalizadas para ocasiones especiales, regalos corporativos y eventos. Contáctanos a hola@valookie.com con tus requerimientos y nuestro equipo trabajará contigo para crear el pedido personalizado perfecto.'
     },
     {
       question: '¿Hacen envíos internacionales?',
