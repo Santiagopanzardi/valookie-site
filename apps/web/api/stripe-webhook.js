@@ -98,6 +98,18 @@ export default async function handler(req, res) {
         phone: metadata.customer_phone || fullSession.customer_details?.phone || '',
       };
 
+      const token = await getPbAdminToken();
+
+      const existingCheck = await fetch(
+        `${process.env.POCKETBASE_URL}/api/collections/orders/records?filter=stripeSessionId="${session.id}"`,
+        { headers: { 'Authorization': token } }
+      );
+      const existingData = await existingCheck.json();
+      if (existingData.totalItems > 0) {
+        console.log('Order already exists for session:', session.id);
+        return res.status(200).json({ received: true });
+      }
+
       const orderData = {
         userId: metadata.user_id || '',
         items: items,
@@ -113,7 +125,6 @@ export default async function handler(req, res) {
         customerPhone: metadata.customer_phone || fullSession.customer_details?.phone || '',
       };
 
-      const token = await getPbAdminToken();
       await createOrder(token, orderData);
 
       console.log('Order created for session:', session.id);
