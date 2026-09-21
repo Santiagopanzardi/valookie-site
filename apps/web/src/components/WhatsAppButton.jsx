@@ -27,7 +27,7 @@ function WhatsAppButton() {
         </div>
       )}
       <a
-        href="https://wa.me/34610485979"
+        href="https://wa.me/34623589294"
         target="_blank"
         rel="noopener noreferrer"
         onMouseEnter={() => setHovered(true)}
