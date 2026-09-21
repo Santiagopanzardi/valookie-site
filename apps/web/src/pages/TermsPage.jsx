@@ -24,7 +24,7 @@ const TermsPage = () => {
 
             <section>
               <h2 className="text-2xl font-bold mb-4">1. Información general</h2>
-              <p><strong>Valookie</strong> es una empresa de cookies artesanales con domicilio en El Torrent 1, Mataró, Barcelona (08302). Correo electrónico: <a href="mailto:hola@valookie.com" className="text-primary hover:underline">hola@valookie.com</a>. Teléfono: +34 610 485 979.</p>
+              <p><strong>Valookie</strong> es una empresa de cookies artesanales con domicilio en El Torrent 1, Mataró, Barcelona (08302). Correo electrónico: <a href="mailto:hola@valookie.com" className="text-primary hover:underline">hola@valookie.com</a>. Teléfono: +34 623 589 294.</p>
               <p className="mt-3">El uso de este sitio web y la realización de pedidos implica la aceptación de estos términos y condiciones en su totalidad.</p>
             </section>
 
@@ -98,7 +98,7 @@ const TermsPage = () => {
               <p>Para cualquier consulta sobre estos términos, puedes contactarnos en:</p>
               <ul className="list-none pl-0 space-y-1 text-muted-foreground mt-3">
                 <li>📧 <a href="mailto:hola@valookie.com" className="text-primary hover:underline">hola@valookie.com</a></li>
-                <li>📞 +34 610 485 979</li>
+                <li>📞 +34 623 589 294</li>
                 <li>📍 El Torrent 1, Mataró, Barcelona (08302)</li>
               </ul>
             </section>

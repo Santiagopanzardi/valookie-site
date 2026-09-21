@@ -223,9 +223,9 @@ const AboutPage = () => {
             >
               <div className="space-y-4">
                 {[
-                  { days: "Lunes, miércoles, jueves y viernes", hours: "9:00–13:00 y 16:30–20:00" },
-                  { days: "Sábado y domingo", hours: "10:00–14:00 y 16:30–20:00" },
-                  { days: "Martes", hours: "Cerrado", closed: true },
+                  { days: "Lunes a viernes", hours: "9:00–13:00 y 16:30–20:00" },
+                  { days: "Domingo y festivo", hours: "10:00–13:00 y 17:00–20:00" },
+                  { days: "Sábado", hours: "Cerrado", closed: true },
                 ].map((item, i) => (
                   <div key={i} className={`flex justify-between items-center py-3 ${i < 2 ? 'border-b border-border' : ''}`}>
                     <span className="font-medium text-foreground">{item.days}</span>
